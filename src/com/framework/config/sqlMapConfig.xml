@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+    	<typeAlias type="com.framework.base.entity.Oper" alias="Oper"/> 
+    	<typeAlias type="com.framework.base.entity.BaseUsers" alias="BaseUsers"/> 
+    	<typeAlias type="com.framework.base.entity.Criteria" alias="Criteria"/> 
+    	<typeAlias type="com.framework.base.entity.BaseModules" alias="BaseModules"/>
+    	<typeAlias type="com.framework.base.entity.BaseFields" alias="BaseFields"/>
+    	<typeAlias type="com.framework.base.entity.BaseRoles" alias="BaseRoles"/>
+    	<typeAlias type="com.framework.base.entity.BaseRoleModule" alias="BaseRoleModule"/>
+    </typeAliases>
+    <mappers>
+    	<mapper resource="/com/framework/config/sqlmap/base/login.xml"/>
+    	<mapper resource="/com/framework/config/sqlmap/base/baseModule.xml"/>
+    	<mapper resource="/com/framework/config/sqlmap/base/baseFields.xml"/>
+    	<mapper resource="/com/framework/config/sqlmap/base/baseUser.xml"/>
+    	<mapper resource="/com/framework/config/sqlmap/base/baseRoles.xml"/>
+    </mappers>
+</configuration>

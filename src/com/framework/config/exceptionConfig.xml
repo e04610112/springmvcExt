@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app-exception>
+	<exception errorCode="999999">
+		<requestMapping></requestMapping>
+        <level></level>
+        <message>抱歉,无法完成您的请求</message>
+        <cause>内部服务器错误。我们正在努力解决该问题，给您造成的不便我们非常抱歉。</cause>
+        <moveTo></moveTo>
+<!--        <moveTo>您可能需要：<![CDATA[<a href="${domain.main}/admin.do">访问航天易卡首页</a>]]></moveTo>-->
+    </exception>
+    
+    <exception errorCode="cardDraw_updateAmountFalse">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法提交</message>
+		<cause>卡号错误或者卡号状态异常</cause>
+		<moveTo>
+		</moveTo>
+    </exception>
+	<exception errorCode="device_updateAmountFalse">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法提交出库</message>
+		<cause>POS编号错误或者POS库存状态异常</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	<exception errorCode="cardInvalid_updateAmountFalse">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法提交</message>
+		<cause>卡号错误或者卡号状态异常</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	 <exception errorCode="FILE_NOT_EXIST">
+		<requestMapping>${domain.main}/admin.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，文件下载失败</message>
+		<cause>找不到该文件，请稍后再试</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/admin.do">访问首页</a>]]></moveTo>
+	</exception>
+	<exception errorCode="IMG_NOT_EXIST">
+		<requestMapping>/admin.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法生成资源</message>
+		<cause>找不到资源图片，请稍后再试</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	<!-- 制卡 BEGIN -->
+	 <exception errorCode="CARDMAKE_APPLY_PARAM_NOT_EXIST">
+		<requestMapping>/beforeSale/cardMake/apply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成制卡申请</message>
+		<cause>参数找不到，请重新核对</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/cardMake/apply.do">访问制卡申请</a>]]></moveTo>
+	</exception>
+	
+	 <exception errorCode="CARDMAKE_APPLY_PARAM_ERROR">
+		<requestMapping>/beforeSale/cardMake/apply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成操作制卡申请</message>
+		<cause>参数有误，请重新核对</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/cardMake/apply.do">访问制卡申请</a>]]></moveTo>
+	</exception>
+	
+	 <exception errorCode="CARDMAKE_CREATE_EXCEL">
+		<requestMapping>/beforeSale/cardMake/listResource.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成资源生成操作</message>
+		<cause>生成EXCEL有误，需要的数据不正确</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/cardMake/listResource.do">访问卡资源生成</a>]]></moveTo>
+	</exception>
+	
+	 <exception errorCode="CARDMAKE_DELIVERY_CARDNO">
+		<requestMapping>/beforeSale/cardMake/listDeliveryRegister.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成到货操作</message>
+		<cause>卡号段有误，请重新核对号段是否存在</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/cardMake/listDeliveryRegister.do">访问到货登记</a>]]></moveTo>
+	</exception>
+	<!-- 制卡 END -->
+	
+	<!-- 商户制卡 BEGIN -->
+	 <exception errorCode="MERCARDMAKE_CREATE_EXCEL">
+		<requestMapping>/beforeSale/merCardMake/listResource.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成资源生成操作</message>
+		<cause>生成EXCEL有误，需要的数据不正确</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/merCardMake/listResource.do">访问卡资源生成</a>]]></moveTo>
+	</exception>
+	
+	 <exception errorCode="MERCARDMAKE_DELIVERY_CARDNO">
+		<requestMapping>/beforeSale/merCardMake/listDeliveryRegister.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成到货操作</message>
+		<cause>卡号段有误，请重新核对号段是否存在</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/merCardMake/listDeliveryRegister.do">访问到货登记</a>]]></moveTo>
+	</exception>
+	
+	 <exception errorCode="MERCARDMAKE_TRANSFERY_CARDNO">
+		<requestMapping>/beforeSale/merCardMake/listTransferyRegister.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成交货操作</message>
+		<cause>卡号段有误，请重新核对号段是否存在</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/beforeSale/merCardMake/listTransferyRegister.do">访问交货登记</a>]]></moveTo>
+	</exception>
+	<!-- 商户制卡 END -->
+	
+	
+	<!-- 卡销售 -->
+	<exception errorCode="UPDATE_SALE_FINANCE">
+		<requestMapping>/sale/saleReg/addSaleFinanceAudit.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成财务审批操作</message>
+		<cause>销售信息更新不成功，请检查！</cause>
+		<moveTo></moveTo>
+	</exception>
+	<exception errorCode="SALE_REG_ADD">
+		<requestMapping>/sale/saleReg/addPersonICSale.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成销售登记操作</message>
+		<cause>卡号段更新不成功，请重新核对号段是否正确</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/sale/saleReg/addPersonICSale.do">访问个人IC卡销售登记</a>]]></moveTo>
+	</exception>
+	<!-- 更新持卡人信息 -->
+	<exception errorCode="UPDATE_CERTIFICATION">
+		<requestMapping>/afterSale/holderModify/updateCertificationByCertId.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成持卡人信息登记操作</message>
+		<cause>持卡人信息更新不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/holderModify/updateCertificationByCertId.do">访问持卡人信息修改</a>]]></moveTo>
+	</exception>
+	<!--充值卡充值 -->
+	<exception errorCode="RECH_CARD_NOT_EXIST">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>IC卡不存在，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_NOT_EXIST_RECH">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>充值卡不存在，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/linkRechAdd.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_1000">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>该卡未实名登记，预付卡总金额不能超过1000，请进行实名登记！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_5000">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>该卡已实名登记，预付卡总金额不能超过5000！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_ADD">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>添加充值记录不成功，请检查！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_UPDATE_IC">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>更新IC卡金额不成功，请检查！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<exception errorCode="RECH_CARD_UPDATE_RECH">
+		<requestMapping>/afterSale/rech/addRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡充值操作</message>
+		<cause>作废充值卡不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/rech/addRech.do">访问卡充值登记</a>]]></moveTo>
+	</exception>
+	<!--卡挂失 -->
+	<exception errorCode="CARD_LOSS">
+		<requestMapping>/afterSale/loss/cardLoss.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡挂失操作</message>
+		<cause>更新卡信息不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/loss/cardLoss.do">访问卡挂失</a>]]></moveTo>
+	</exception>
+	<!--卡恢复-->
+	<exception errorCode="CARD_REUSE_AUDIT">
+		<requestMapping>/afterSale/reuse/cardReuse.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡恢复操作</message>
+		<cause>更新卡状态不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/reuse/linkReuseList.do">访问卡恢复</a>]]></moveTo>
+	</exception>
+	<exception errorCode="CARD_REUSE">
+		<requestMapping>/afterSale/reuse/cardReuse.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡恢复操作</message>
+		<cause>插入卡恢复主表信息不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/reuse/linkReuseList.do">访问卡恢复</a>]]></moveTo>
+	</exception>
+	<exception errorCode="CARD_REUSE_DETAIL">
+		<requestMapping>/afterSale/reuse/cardReuse.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡恢复操作</message>
+		<cause>插入卡恢复详细表信息不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/reuse/linkReuseList.do">访问卡恢复</a>]]></moveTo>
+	</exception>
+	<!--补卡 -->
+	<exception errorCode="CARD_REPLACE">
+		<requestMapping>/afterSale/replace/cardReplace.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成补卡操作</message>
+		<cause>补卡不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/replace/cardReplace.do">访问补卡</a>]]></moveTo>
+	</exception>
+	<exception errorCode="CARD_REPLACE_RE">
+		<requestMapping>/afterSale/replace/cardReplace.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成补卡操作</message>
+		<cause>新卡与旧卡并非同一个实名用户，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/replace/cardReplace.do">访问补卡</a>]]></moveTo>
+	</exception>
+	<exception errorCode="CARD_REPLACE_NEWCARD">
+		<requestMapping>/afterSale/replace/cardReplace.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成补卡操作</message>
+		<cause>新卡金额不为0元，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/replace/cardReplace.do">访问补卡</a>]]></moveTo>
+	</exception>
+	<!--退卡-->
+	<exception errorCode="CARD_REFUND_UPDATE_CARD">
+		<requestMapping>/afterSale/refund/cardRefund.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成退卡操作</message>
+		<cause>更新IC卡状态不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/refund/linkRefundList.do">访问退卡</a>]]></moveTo>
+	</exception>
+	<exception errorCode="CARD_REFUND">
+		<requestMapping>/afterSale/refund/cardRefund.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成退卡操作</message>
+		<cause>插入退卡记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/refund/linkRefundList.do">访问退卡</a>]]></moveTo>
+	</exception>
+	<!--卡密码重置-->
+	<exception errorCode="PASSWD_RESET">
+		<requestMapping>/afterSale/passwdReset/passwdReset.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成卡密码操作</message>
+		<cause>卡密码重置不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/passwdReset/passwdReset.do">访问卡密码重置</a>]]></moveTo>
+	</exception>
+	<!--缴费受理-->
+	<exception errorCode="ADD_APP_UTILITIES_PAY_NOTEXIST_CARD">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayAdd.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>该卡号不存，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/addAppUtilitiesPay.do">访问缴费受理</a>]]></moveTo>
+	</exception>
+	<exception errorCode="ADD_APP_UTILITIES_PAY_UPDATE_PRICE">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayAdd.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>更新卡金额不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/addAppUtilitiesPay.do">访问缴费受理</a>]]></moveTo>
+	</exception>
+	<exception errorCode="ADD_APP_UTILITIES_PAY">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayAdd.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>添加记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/addAppUtilitiesPay.do">访问缴费受理</a>]]></moveTo>
+	</exception>
+	<exception errorCode="ADD_APP_UTILITIES_PAY_NOT_PRICE">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayAdd.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>卡金额不足，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/addAppUtilitiesPay.do">访问缴费受理</a>]]></moveTo>
+	</exception>
+	<!--缴费冲正-->
+	<exception errorCode="ADD_APP_UTILITIES_PAY_BACK">
+		<requestMapping>/afterSale/utilitiesPay/addAppUtilitiesPayBack.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费冲正操作</message>
+		<cause>金额超过限额或添加记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/addAppUtilitiesPayBack.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	<!--缴费冲正审批-->
+	<exception errorCode="ADD_APP_UTILITIES_PAY_AUDIT_5000">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>缴费冲正实名用户总金额超过限额5000元，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	<exception errorCode="APP_UTILITIES_PAY_CARD_NOT_EXISTS">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>该卡状态有误，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	<exception errorCode="APP_UTILITIES_PAY_CARD_NO">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>该卡不存在，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	
+	<exception errorCode="ADD_APP_UTILITIES_PAY_AUDIT_1000">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>缴费冲正非实名用户总金额超过限额1000元，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	
+	<exception errorCode="ADD_APP_UTILITIES_PAY_AUDIT">
+		<requestMapping>/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成缴费受理操作</message>
+		<cause>添加记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/utilitiesPay/linkAppUtilitiesPayDetail.do">访问缴费冲正</a>]]></moveTo>
+	</exception>
+	<!--现金充值-->
+	<exception errorCode="ADD_CASH_RECH">
+		<requestMapping>/afterSale/cashRech/addCashRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成现金充值操作</message>
+		<cause>添加记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCashRechAdd.do">访问现金充值</a>]]></moveTo>
+	</exception>
+	<exception errorCode="ADD_CASH_RECH_UPDATE_CARD">
+		<requestMapping>/afterSale/cashRech/addCashRech.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成现金充值操作</message>
+		<cause>更新金额不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCashRechAdd.do">访问现金充值</a>]]></moveTo>
+	</exception>
+	<!--财务审批-->
+	<exception errorCode="ADD_RECH_FINANCE_AUDIT">
+		<requestMapping>/afterSale/cashRech/addRechFinanceAudit.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成财务审批操作</message>
+		<cause>更新记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/addRechFinanceAudit.do">访问财务审批</a>]]></moveTo>
+	</exception>
+	<!--收款登记-->
+	<exception errorCode="ADD_RECH_GATHERING_REGISTER">
+		<requestMapping>/afterSale/cashRech/addRechGatheringRegister.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成收款登记操作</message>
+		<cause>更新记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/addRechGatheringRegister.do">访问收款登记</a>]]></moveTo>
+	</exception>
+	<!--添加单位-->
+	<exception errorCode="ADD_COMPANY">
+		<requestMapping>/afterSale/cashRech/addCompany.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位操作</message>
+		<cause>插入记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/addCompany.do">访问添加单位</a>]]></moveTo>
+	</exception>
+	<!--添加单位员工-->
+	<exception errorCode="ADD_COMPANY_STAFF">
+		<requestMapping>/afterSale/cashRech/addCompanyStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位员工操作</message>
+		<cause>插入记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkAddCompanyStaff.do">访问添加单位员工</a>]]></moveTo>
+	</exception>
+	<exception errorCode="ADD_COMPANY_STAFF_EXISTS">
+		<requestMapping>/afterSale/cashRech/addCompanyStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位员工操作</message>
+		<cause>存在重复的员工记录，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkAddCompanyStaff.do">访问添加单位员工</a>]]></moveTo>
+	</exception>
+	
+	<!--导入单位员工充值-->
+	<exception errorCode="IMPORT_COMPANY_STAFF">
+		<requestMapping>/afterSale/cashRech/importCompanyStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位员工充值操作</message>
+		<cause>不存在该充值单位，请检查！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkRechCompanyStaffAdd.do">访问单位员工充值</a>]]></moveTo>
+	</exception>
+	<exception errorCode="COMPANY_NAME_DIFFERENT">
+		<requestMapping>/afterSale/cashRech/importStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成导入员工操作</message>
+		<cause>导入的单位与实际单位不符合，请检查！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCompanyStaffList.do">访问单位员工录入</a>]]></moveTo>
+	</exception>
+	<exception errorCode="EXCEL_DATA_ERROR">
+		<requestMapping>/afterSale/cashRech/importCompanyStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位员工充值操作</message>
+		<cause>要充值的金额有误，请检查！</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkRechCompanyStaffAdd.do">访问单位员工充值</a>]]></moveTo>
+	</exception>
+	<!--添加单位员工充值-->
+	<exception errorCode="ADD_RECH_COMPANY_STAFF">
+		<requestMapping>/afterSale/cashRech/addRechCompanyStaff.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成添加单位员工充值操作</message>
+		<cause>插入记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkRechCompanyStaffAdd.do">访问单位员工充值</a>]]></moveTo>
+	</exception>
+	
+	<!--添加单位员工 总经理审批-->
+	<exception errorCode="COMPANY_RECH_FINANCE_AUDIT">
+		<requestMapping>/afterSale/cashRech/addCompanyRechManageAudit.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成总经理审批操作</message>
+		<cause>更新记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCompanyRechManageAudit.do">访问总经理审批</a>]]></moveTo>
+	</exception>
+	<!--添加单位员工 总经理审批 更新金额-->
+	<exception errorCode="UPDATE_CARD_WEBPRICE">
+		<requestMapping>/afterSale/cashRech/addCompanyRechManageAudit.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成总经理审批操作</message>
+		<cause>更新金额不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCompanyRechManageAudit.do">访问总经理审批</a>]]></moveTo>
+	</exception>
+	
+	<!--添加单位员工 收款登记-->
+	<exception errorCode="COMPANY_RECH_GATHERING_REGISTER">
+		<requestMapping>/afterSale/cashRech/addCompanyRechGatheringRegister.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成收款登记操作</message>
+		<cause>更新记录不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCompanyRechGatheringRegister.do">访问收款登记</a>]]></moveTo>
+	</exception>
+	
+	<!--添加单位员工 收款确认 更新金额-->
+	<exception errorCode="UPDATE_CARD_WEBPRICE_COMFIRM">
+		<requestMapping>/afterSale/cashRech/addCompanyRechGatheringComfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成收款确认操作</message>
+		<cause>更新金额不成功，请检查</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/afterSale/cashRech/linkCompanyRechGatheringComfirm.do">访问收款确认</a>]]></moveTo>
+	</exception>
+	
+	<!--金额超过1000-->
+	<exception errorCode="PRICE_OVER_1000">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成操作</message>
+		<cause>非实名客户总金额不能超过1000元，请检查!</cause>
+		<moveTo></moveTo>
+	</exception>
+	<!--金额超过5000-->
+	<exception errorCode="PRICE_OVER_5000">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成操作</message>
+		<cause>实名客户总金额不能超过5000元，请检查!</cause>
+		<moveTo></moveTo>
+	</exception>
+	<!--不存在对应的卡号-->
+	<exception errorCode="CARD_NOT_EXIST">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成操作</message>
+		<cause>不存在符合的卡号，请检查!</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	<!--商户不能进行重复额度授予-->
+	<exception errorCode="ADD_MER_CREDIT_GRANT">
+		<requestMapping>/uPay/uPayBind/merCreditGrant.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成该商户额度授予操作</message>
+		<cause>该商户已进行过额度授予，请进行额度调整操作</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/uPay/creditAdjust/linkCreditAdjustApply.do">商户额度调整</a>]]></moveTo>
+	</exception>
+	
+	<!--代缴费：检查ic卡是否已经在审批中-->
+	<exception errorCode="CHECK_CARD_UNDER_APPLY">
+		<requestMapping>/uPay/uPayBind/addCardBindApply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成申请操作</message>
+		<cause>本批次申请中，有部分IC卡已经在审批环节下，请先完成审批操作</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/uPay/uPayBind/linkCardBindList.do">卡绑定审批</a>]]></moveTo>
+	</exception>
+	
+	<!--检查商户额度调整是否已经在审批中-->
+	<exception errorCode="CHECK_ORG_UNDER_APPLY">
+		<requestMapping>/uPay/creditAdjust/addCreditAdjustApply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成申请操作</message>
+		<cause>该商户额度调整已经在审批中，请先完成审批操作</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/uPay/creditAdjust/linkCreditAdjustApproveList.do">额度调整审批</a>]]></moveTo>
+	</exception>
+	
+	<!--检查网点余额补充是否已经在审批中-->
+	<exception errorCode="CHECK_NET_UNDER_APPLY">
+		<requestMapping>/uPay/incPrice/addIncUPayPrice.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成申请操作</message>
+		<cause>该申请部分数据已经在审批或复核中，请先完成审批操作</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="/uPay/incPrice/linkIncPriceApproveList.do">余额补充审批</a>]]>、
+		  <![CDATA[<a href="${domain.main}/uPay/incPrice/linkIncPriceReviewList.do">余额补充复核</a>]]>
+		</moveTo>
+	</exception>
+	
+	<!--电子缴费：检查ic卡是否已经在审批中-->
+	<exception errorCode="CHECK_EPAY_CARD_UNDER_APPLY">
+		<requestMapping>/ePay/ePayBind/addEpayCardBindApply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成申请操作</message>
+		<cause>本批次申请中，有部分IC卡已经在审批环节下，请先完成审批操作</cause>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/ePay/ePayBind/linkEpayCardBindApproveList.do">卡绑定审批</a>]]></moveTo>
+	</exception>
+	
+	<!--电子缴费：检查派卡是否已经在审批中-->
+	<exception errorCode="CHECK_EPAY_NET_UNDER_APPLY">
+		<requestMapping>/ePay/eCardSent/addEpayCardSentApply.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成申请操作</message>
+		<cause>该申请部分数据已经在审批或复核中，请先完成审批操作</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/ePay/eCardSent/linkEpayCardSentApproveList.do">派卡审核</a>]]>、
+		  <![CDATA[<a href="${domain.main}/ePay/eCardSent/linkEpayCardSentReviewList.do">派卡确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="POS_CHANGE_CONFIRM_UPDATE_DEVICE">
+		<requestMapping>/device/pos/addPosChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成入库更换确认操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosChangeConfirm.do">POS更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="POS_CHANGE_REG_UPDATE_DEVICE">
+		<requestMapping>/device/pos/addPosChangeReg.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成更换登记操作</message>
+		<cause>更换设备不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosChangeReg.do">POS更换登记</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="SIM_CHANGE_REG_UPDATE_DEVICE">
+		<requestMapping>/device/sim/addSimChangeReg.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成更换登记操作</message>
+		<cause>更换设备不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/sim/linkSimChangeReg.do">SIM更换登记</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="POS_CHANGE_CONFIRM_UPDATE_NEW_DEVICE">
+		<requestMapping>/device/pos/addPosChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成入库更换确认操作</message>
+		<cause>新设备更新记录失败</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosChangeConfirm.do">POS更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="SIM_CHANGE_CONFIRM_UPDATE_NEW_DEVICE">
+		<requestMapping>/device/sim/addSimChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成入库更换确认操作</message>
+		<cause>新设备更新记录失败</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/sim/linkSimChangeConfirm.do">SIM更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="PSAM_CHANGE_CONFIRM_UPDATE_DEVICE">
+		<requestMapping>/device/psam/addPsamChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成入库更换确认操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/psam/linkPsamChangeConfirm.do">Psam更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="PSAM_CHANGE_REG_UPDATE_DEVICE">
+		<requestMapping>/device/psam/addPsamChangeReg.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成更换登记操作</message>
+		<cause>更换设备不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/psam/linkPsamChangeReg.do">Psam更换登记</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="PSAM_CHANGE_CONFIRM_UPDATE_NEW_DEVICE">
+		<requestMapping>/device/psam/addPsamChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成更换登记操作</message>
+		<cause>新设备更新记录失败</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/psam/linkPsamChangeConfirm.do">Psam更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="SIM_CHANGE_CONFIRM_UPDATE_DEVICE">
+		<requestMapping>/device/sim/addSimChangeConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成入库更换确认操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkSimChangeConfirm.do">Sim更换入库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="POS_REPAIR_PASS_CONFIRM">
+		<requestMapping>/device/pos/addPosRepairPassConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成维修合格确认操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosRepairPassConfirm.do">POS维修合格确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="POS_REPAIR_OUT_CONFIRM">
+		<requestMapping>/device/pos/addPosRepairOutConfirm.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成维修出库确认操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosRepairOutConfirm.do">POS维修出库确认</a>]]>
+		</moveTo>
+	</exception>
+	<exception errorCode="UPDATE_FLOW_POS_REPAIR_IN">
+		<requestMapping>/device/pos/addPosRepairIn.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成维修入库操作</message>
+		<cause>设备更新状态不成功</cause>
+		<moveTo>
+		  您可能需要：<![CDATA[<a href="${domain.main}/device/pos/linkPosRepairIn.do">POS维修入库</a>]]>
+		</moveTo>
+	</exception>
+	<!--代缴费卡录入-->
+	<exception errorCode="CHECK_UPAY_CARD_IS_EXIST">
+		<requestMapping>/upay/sent/upayCardUpload.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成代缴费卡录入操作</message>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/upay/sent/upayCardUpload.do">代缴费卡录入</a>]]></moveTo>
+	</exception>
+	
+	<exception errorCode="CHECK_UPAY_CARD_LENGTH_EXCEPTION">
+		<requestMapping>/upay/sent/upayCardUpload.do</requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成代缴费卡录入操作</message>
+		<moveTo>您可能需要：<![CDATA[<a href="${domain.main}/upay/sent/upayCardUpload.do">代缴费卡录入</a>]]></moveTo>
+	</exception>
+	
+	<exception errorCode="device_MerPos_PosNoOrDeviceExist">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法提交</message>
+		<cause>数据错误，Pos数据已经存在,不可重复领用</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	
+	<!-- Pos领用 -->
+	<exception errorCode="device_updateDeviceDepositAmountFalse">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法提交</message>
+		<cause>更新商户押金错误，押金数据不存在</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+	
+	<exception errorCode="ENCRYPT_PASSWORD">
+		<requestMapping></requestMapping>
+		<level>Service</level>
+		<message>抱歉，无法完成操作</message>
+		<cause>系统加密连接异常，请联系系统管理员（ENCRYPT）</cause>
+		<moveTo></moveTo>
+	</exception>
+	
+</app-exception>
+

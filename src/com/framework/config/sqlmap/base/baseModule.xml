@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="module">
+	
+	
+		
+	
+	<resultMap type="BaseModules" id="BaseModulesMap">
+		<id property="moduleId" column="MODULE_ID"></id>
+		<id property="moduleName" column="MODULE_NAME"></id>
+		<id property="moduleUrl" column="MODULE_URL"></id>
+		<id property="parentId" column="PARENT_ID"></id>
+		<id property="leaf" column="LEAF"></id>
+		<id property="expanded" column="EXPANDED"></id>
+		<id property="displayIndex" column="DISPLAY_INDEX"></id>
+		<id property="isDisplay" column="IS_DISPLAY"></id>
+		<id property="enModuleName" column="EN_MODULE_NAME"></id>
+		<id property="iconCss" column="ICON_CSS"></id>
+		<id property="information" column="INFORMATION"></id>
+	</resultMap>
+	<select id="selectByExample" resultMap="BaseModulesMap" parameterType="Criteria" >
+    	select * from (SELECT row_.*,rownum rownum_ from(
+	    select 
+	     MODULE_ID, MODULE_NAME, MODULE_URL, PARENT_ID, LEAF, EXPANDED, DISPLAY_INDEX, IS_DISPLAY, 
+    	EN_MODULE_NAME, ICON_CSS, INFORMATION
+	    from BASE_MODULES
+	    <if test="condition.moduleNameLike!=null and condition.moduleNameLike!=''">
+				where  MODULE_NAME like '%'||#{condition.moduleNameLike}||'%' 
+		</if>
+	   ) row_  
+	   <if test="oracleEnd == null" >
+          ) 
+      </if>
+	    <if test="oracleEnd != null" >
+       where rownum &lt;= #{oracleEnd}) where rownum_ &gt; #{oracleStart}
+      </if>
+	   
+  	</select>
+	<select id="countByExample" parameterType="Criteria" resultType="int" >
+	    select count(*) from BASE_MODULES
+	    
+	</select>
+	<select id="selectAllModule" resultMap="BaseModulesMap" parameterType="Map" >
+    	
+	    select 
+	     MODULE_ID, MODULE_NAME, MODULE_URL, PARENT_ID, LEAF, EXPANDED, DISPLAY_INDEX, IS_DISPLAY, 
+    	EN_MODULE_NAME, ICON_CSS, INFORMATION
+	    from BASE_MODULES  where  leaf = 0 order by module_id asc
+	    
+	  
+  	</select>
+  	<insert id="insertBaseModules"  parameterType="BaseModules">
+		insert into BASE_MODULES(
+	  	    MODULE_ID ,
+  			MODULE_NAME ,
+  			MODULE_URL  ,
+  			PARENT_ID  ,
+  			LEAF ,
+  			EXPANDED ,
+  			DISPLAY_INDEX,
+  			IS_DISPLAY,
+  			EN_MODULE_NAME ,
+  			ICON_CSS ,
+  			INFORMATION 
+	  	) values (
+	  	    SEQ_BASE_MODULES.NEXTVAL,
+	  	    #{moduleName,jdbcType=VARCHAR},
+	  	    #{moduleUrl,jdbcType=VARCHAR},
+	  	    #{parentId,jdbcType=NUMERIC},
+	  	    #{leaf,jdbcType=NUMERIC},
+	  	    #{expanded,jdbcType=NUMERIC},
+	  	    #{displayIndex,jdbcType=NUMERIC},
+	  	    #{isDisplay,jdbcType=NUMERIC},
+	  	    #{enModuleName,jdbcType=VARCHAR},
+	  	    #{iconCss,jdbcType=VARCHAR},
+	  	    #{information,jdbcType=VARCHAR}
+	  	)
+	</insert>
+  	<update id="updateBaseModules" parameterType="BaseModules" > 
+		update BASE_MODULES 
+		set 
+  			MODULE_NAME=#{moduleName,jdbcType=VARCHAR},
+  			MODULE_URL=#{moduleUrl,jdbcType=VARCHAR},
+  			PARENT_ID=#{parentId,jdbcType=NUMERIC},
+  			LEAF=#{leaf,jdbcType=NUMERIC},
+  			EXPANDED=#{expanded,jdbcType=NUMERIC},
+  			DISPLAY_INDEX=#{displayIndex,jdbcType=NUMERIC},
+  			IS_DISPLAY=#{isDisplay,jdbcType=NUMERIC},
+  			EN_MODULE_NAME=#{enModuleName,jdbcType=VARCHAR},
+  			ICON_CSS=#{iconCss,jdbcType=VARCHAR},
+  			INFORMATION=#{information,jdbcType=VARCHAR}  
+		where 
+			MODULE_ID = #{moduleId} 
+	</update>
+	<delete id="deleteModules" parameterType="Map">
+	  delete from BASE_MODULES t where t.MODULE_ID=#{moduleId} or t.PARENT_ID=#{moduleId}
+	</delete>
+    <resultMap type="BaseRoleModule" id="BaseRoleModuleMap">
+		<id property="roleModuleId" column="ROLE_MODULE_ID"></id>
+		<id property="roleId" column="ROLE_ID"></id>
+		<id property="moduleId" column="MODULE_ID"></id>
+	</resultMap>
+  	<select id="selectModulesByRoleId" resultMap="BaseRoleModuleMap" parameterType="Criteria" >
+    	select 
+	    ROLE_MODULE_ID, ROLE_ID, MODULE_ID 
+	     from BASE_ROLE_MODULE where 1=1 
+	    <if test="condition.roleId != null" >
+         and ROLE_ID = #{condition.roleId}
+      </if>
+      <if test="condition.moduleId != null" >
+         and MODULE_ID = #{condition.moduleId}
+      </if>
+	  
+  	</select>
+	
+</mapper>	

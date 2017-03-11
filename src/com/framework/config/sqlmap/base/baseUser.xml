@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="user">
+	
+	
+		
+	
+	<resultMap type="BaseUsers" id="BaseUsersMap">
+		<id property="userId" column="USER_ID"></id>
+		<id property="account" column="ACCOUNT"></id>
+		<id property="password" column="PASSWORD"></id>
+		<id property="realName" column="REAL_NAME"></id>
+		<id property="sex" column="SEX"></id>
+		<id property="email" column="EMAIL"></id>
+		<id property="mobile" column="MOBILE"></id>
+		<id property="officePhone" column="OFFICE_PHONE"></id>
+		<id property="errorCount" column="ERROR_COUNT"></id>
+		<id property="lastLoginTime" column="LAST_LOGIN_TIME"></id>
+		<id property="lastLoginIp" column="LAST_LOGIN_IP"></id>
+		<id property="remark" column="REMARK"></id>
+	</resultMap>
+	<select id="selectByExample" resultMap="BaseUsersMap" parameterType="Criteria" >
+    	select * from (SELECT row_.*,rownum rownum_ from(
+	    select 
+	     USER_ID, ACCOUNT, PASSWORD, REAL_NAME, SEX,
+	      EMAIL, MOBILE, OFFICE_PHONE, 
+    	ERROR_COUNT, LAST_LOGIN_TIME, LAST_LOGIN_IP,REMARK 
+	    from BASE_USERS
+	    <if test="condition.realNameLike!=null and condition.realNameLike!=''">
+				where  REAL_NAME like '%'||#{condition.realNameLike}||'%' 
+		</if>
+	   ) row_ where rownum &lt;= #{oracleEnd}) where rownum_ &gt; #{oracleStart}
+  	</select>
+	<select id="countByExample" parameterType="Criteria" resultType="int" >
+	    select count(*) from BASE_MODULES 
+	    <if test="condition.realNameLike!=null and condition.realNameLike!=''">
+				where  REAL_NAME like '%'||#{condition.realNameLike}||'%' 
+		</if>
+	</select>
+	
+  	
+	
+</mapper>	

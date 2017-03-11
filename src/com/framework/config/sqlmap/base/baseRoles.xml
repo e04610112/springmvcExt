@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="roles">
+	
+	
+		
+	
+	<resultMap type="BaseRoles" id="BaseRolesMap">
+		<id property="roleId" column="ROLE_ID"></id>
+		<id property="roleName" column="ROLE_NAME"></id>
+		<id property="roleDesc" column="ROLE_DESC"></id>
+	</resultMap>
+	<select id="selectByExample" resultMap="BaseRolesMap" parameterType="Criteria" >
+    	select * from (SELECT row_.*,rownum rownum_ from(
+	    select 
+	     ROLE_ID, ROLE_NAME, ROLE_DESC 
+	    from BASE_ROLES
+	    <if test="condition.roleNameLike != null" >
+         <![CDATA[ and ROLE_NAME LIKE '%'||#{condition.roleNameLike}||'%' ]]>
+      </if>
+      <if test="condition.roleName != null" >
+         and ROLE_NAME = #{condition.roleName}
+      </if>
+      <if test="condition.roleDesc != null" >
+         and ROLE_DESC = #{condition.roleDesc}
+      </if>
+	   ) row_ where rownum &lt;= #{oracleEnd}) where rownum_ &gt; #{oracleStart}
+  	</select>
+	<select id="countByExample" parameterType="Criteria" resultType="int" >
+	     select count(*) from BASE_ROLES where 1=1 
+	    <if test="condition.roleNameLike != null" >
+         <![CDATA[ and ROLE_NAME LIKE '%'||#{condition.roleNameLike}||'%' ]]>
+      </if>
+      <if test="condition.roleName != null" >
+         and ROLE_NAME = #{condition.roleName}
+      </if>
+      <if test="condition.roleDesc != null" >
+         and ROLE_DESC = #{condition.roleDesc}
+      </if>
+		
+	</select>
+	
+  	<delete id="deleteModuleByRoleId" parameterType="Map">
+	  delete from BASE_ROLE_MODULE t where t.ROLE_ID=#{roleId} 
+	</delete>
+	<insert id="insertRoleModule"  parameterType="Map">
+		insert into BASE_ROLE_MODULE(
+	  	    ROLE_MODULE_ID ,
+  			ROLE_ID ,
+  			MODULE_ID 
+	  	) values (
+	  	    #{roleModuleId,jdbcType=VARCHAR},
+	  	    #{roleId,jdbcType=VARCHAR},
+	  	    #{moduleId,jdbcType=NUMERIC}
+	  	)
+	</insert>
+	
+	
+</mapper>	

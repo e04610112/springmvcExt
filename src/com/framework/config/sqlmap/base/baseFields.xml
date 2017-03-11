@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="fields">
+	
+	
+		
+	
+	
+	<resultMap  type="BaseFields" id="BaseFieldsMap">
+		<id property="fieldId" column="FIELD_ID"></id>
+		<id property="field" column="FIELD"></id>
+	    <id property="fieldName" column="FIELD_NAME"></id>
+	    <id property="valueField" column="VALUE_FIELD"></id>
+	    <id property="displayField" column="DISPLAY_FIELD"></id>
+	    <id property="enabled" column="ENABLED"></id>
+	    <id property="sort" column="SORT"></id>
+	  </resultMap>
+	<select id="selectAllByExample" resultMap="BaseFieldsMap" parameterType="Criteria" >
+    	select 
+    	FIELD_ID, FIELD, FIELD_NAME, VALUE_FIELD, DISPLAY_FIELD, ENABLED, SORT 
+	    from BASE_FIELDS where  1=1  order by field desc ,sort asc
+  	</select>
+	<select id="selectByExample" resultMap="BaseFieldsMap" parameterType="Criteria" >
+    	select * from (SELECT row_.*,rownum rownum_ from(
+    	select 
+    	FIELD_ID, FIELD, FIELD_NAME, VALUE_FIELD, DISPLAY_FIELD, ENABLED, SORT 
+	    from BASE_FIELDS where  1=1  
+	    <if test="condition.fieldNameLike != null" >
+	      <![CDATA[ and FIELD_NAME LIKE '%'||#{condition.fieldNameLike}||'%' ]]>
+	    </if>
+	    <if test="orderByClause != null" >
+	     	order by ${orderByClause}
+	    </if>
+	    <if test="orderByClause == null" >
+	     	order by field desc ,sort asc
+	    </if>
+	    ) row_ where rownum &lt;= #{oracleEnd}) where rownum_ &gt; #{oracleStart}
+  	</select>
+  	<select id="countByExample" resultType="int" parameterType="Criteria" >
+    	
+    	select count(*)  
+	    from BASE_FIELDS where  1=1  
+	    <if test="condition.fieldNameLike != null" >
+	      <![CDATA[ and FIELD_NAME LIKE '%'||#{condition.fieldNameLike}||'%' ]]>
+	    </if>
+	    <if test="orderByClause != null" >
+	     	order by ${orderByClause}
+	    </if>
+	    <if test="orderByClause == null" >
+	     	order by field desc ,sort asc
+	    </if>
+	   
+  	</select>
+  	<insert id="insertBaseFields"  parameterType="BaseFields">
+		insert into BASE_FIELDS(
+	  	    FIELD_ID ,
+  			FIELD ,
+  			FIELD_NAME, 
+  			VALUE_FIELD,
+  			DISPLAY_FIELD,
+  			ENABLED,
+  			SORT
+	  	) values (
+	  	    sys_guid(),
+	  	    #{field,jdbcType=VARCHAR},
+	  	    #{fieldName,jdbcType=VARCHAR},
+	  	    #{valueField,jdbcType=VARCHAR},
+	  	    #{displayField,jdbcType=VARCHAR},
+	  	    #{enabled,jdbcType=NUMERIC},
+	  	    #{sort,jdbcType=NUMERIC}
+	  	)
+	</insert>
+	<update id="updateBaseFields" parameterType="BaseModules" > 
+		update BASE_FIELDS 
+		set 
+  			FIELD= #{field,jdbcType=VARCHAR},
+  			FIELD_NAME=#{fieldName,jdbcType=VARCHAR},
+  			VALUE_FIELD= #{valueField,jdbcType=VARCHAR},
+  			DISPLAY_FIELD= #{displayField,jdbcType=VARCHAR},
+  			ENABLED= #{enabled,jdbcType=NUMERIC},
+  			SORT= #{sort,jdbcType=NUMERIC}
+
+		where 
+			FIELD_ID = #{fieldId,jdbcType=VARCHAR}
+	</update>
+	<delete id="deleteBaseFieldsById" parameterType="Map">
+	  delete from BASE_FIELDS t where t.FIELD_ID=#{fieldId} 
+	</delete>
+	
+</mapper>	

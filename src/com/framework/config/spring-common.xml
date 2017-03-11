@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd	
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+
+	<!-- 自动搜索@Component , @Service , @Repository等标注的类 不搜索@Controller的类 -->
+	<!-- 自动扫描组件，这里要把web下面的 controller去除，他们是在springmvc-servlet.xml中配置的，如果不去除会影响事务管理的。 -->
+	<context:component-scan base-package="com.framework" annotation-config="true">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- enable autowire -->
+	<context:annotation-config />
+
+	<!-- service层的属性和配置文件读入 ,多个用逗号隔开 -->
+	<!-- controller层的属性和配置文件读入 ,多个用逗号隔开-->
+<!--	<context:property-placeholder location="classpath:/config/ibatis/jdbc.properties,classpath:/config/others/config.properties" />-->
+	
+	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring bean对象 -->
+<!--	<bean class="com.framework.base.listener.SpringContextHolder" lazy-init="false" />-->
+	
+	
+	<!-- 数据连接事务 -->
+<!--	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--		<property name="dataSource" ref="proxool" />-->
+<!--	</bean>-->
+
+	<!-- define the SqlSessionFactory -->
+<!--	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--		<property name="dataSource" ref="proxool" />-->
+<!--		<property name="configLocation" value="classpath:/config/ibatis/mybatis-config.xml" />-->
+<!--		<property name="typeAliasesPackage" value="com.chenxin.authority.pojo" />-->
+<!--		 <property name="mapperLocations" value="classpath:/sqlmap/*Mapper.xml" /> -->
+<!--	</bean>-->
+
+	<!-- mybatis接口 -->
+<!--	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--		<property name="basePackage" value="com.chenxin.authority.dao" />-->
+<!--	</bean>-->
+
+	<!-- 连接事务的注解配置 -->
+<!--	<tx:annotation-driven transaction-manager="transactionManager" />-->
+	
+	<!-- 数据库连接池 -->
+<!--	<import resource="classpath:/config/spring/spring-pool.xml" />-->
+<!--	<import resource="classpath:/config/spring/spring-securitycode.xml" />-->
+<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+      <property name="locations">  
+           <list>  
+              <value>classpath:/com/framework/config/jdbc.properties</value>  
+         </list>  
+      </property>  
+   </bean>
+   
+   <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource" >
+        <property name="driverClassName">
+            <value>${database.jdbc.driverClassName}</value>
+        </property>
+        <property name="url" >
+            <value>${database.jdbc.url}</value>
+        </property>
+        <property name="username" >
+            <value>${database.jdbc.username}</value>
+        </property>
+        <property name="password" >
+        	<value>${database.jdbc.password}</value>
+        </property>
+        <property name="maxActive"> 
+           <value>255</value> 
+        </property> 
+        <property name="maxIdle"> 
+           <value>20</value> 
+        </property> 
+        <property name="maxWait"> 
+           <value>10</value> 
+        </property> 
+		<property name="validationQuery">
+           <value>select count(1) from Dual</value>
+        </property>
+        <!-- Test when get connection -->
+        <property name="testOnBorrow">
+           <value>true</value>
+        </property>
+        <!-- Test when return connection to pool -->
+        <property name="testOnReturn">
+           <value>true</value>
+        </property>
+        <property name="testWhileIdle">
+           <value>true</value>
+        </property>
+    </bean>
+<!-- 创建SqlSessionFactory，同时指定数据源-->   
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">    
+        <property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		<property name="configLocation">
+			<value>classpath:/com/framework/config/sqlMapConfig.xml</value>
+		</property>
+    </bean>
+     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">    
+        <constructor-arg index="0" ref="sqlSessionFactory" />    
+    </bean> 
+    <!-- 事务 -->
+     <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:advice id="myAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<tx:method name="*" rollback-for="Throwable" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="myPointcut"
+			expression="execution(* com.framework..service..*.*(..))" />
+		<aop:advisor pointcut-ref="myPointcut" advice-ref="myAdvice" />
+	</aop:config>
+<!--	<bean id="baseFieldsService" class="com.framework.base.service.impl.BaseFieldsServiceImpl"  />-->
+	<bean id="citationService" class="com.framework.base.util.hessian.CitationServiceImpl"></bean>
+
+	<!-- hessian 服务端 
+	     1 首先配置URL处理器
+	     
+	-->
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+			   <prop key="/citation.do">hessianCitationService</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="hessianCitationService" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service">
+			<ref bean="citationService"/>
+		</property>
+		<property name="serviceInterface">
+			<value>com.framework.base.util.hessian.CitationService</value>
+		</property>
+	</bean>
+	<!-- axis2 -->
+<!--	<bean id="applicationContext" -->
+<!--    class="org.apache.axis2.extensions.spring.receivers.ApplicationContextHolder" />-->
+	<bean id="springWsServerService" class="com.framework.base.util.wsaxis2.SpringWsServerService"></bean>
+	<bean id="springAnotherWsServerService" class="com.framework.base.util.wsaxis2.SpringAnotherWsServerService"></bean>
+<!-- activeMQ -->
+    <!-- 连接工厂 -->
+<!--	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">-->
+<!--		<property name="brokerURL" value="tcp://localhost:61616"></property>-->
+<!--	</bean>-->
+<!-- 默认maximumActive = 500;  int maxConnections = 1;  idleTimeout = 30 * 1000; 
+ 其中默认的Connecton连接数为1：
+ 默认的每一个Connecton的创建的Session数量为500个。
+ 默认是实现的PooledConnectionFactory类如下：
+ AmqJNDIPooledConnectionFactory
+ JcaPooledConnectionFactory
+ XaPooledConnectionFactory
+ PooledConnectionFactory
+ -->
+	<bean id="connectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+          <property name="connectionFactory">
+              <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+                  <property name="brokerURL">
+                      <value>tcp://localhost:61616</value>
+                  </property>
+                  <property name="useAsyncSend">
+                      <value>true</value>
+                  </property>
+              </bean>
+          </property>
+      </bean>
+	<!-- 队列 点对点队列模式-->
+	<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="rantz.marketing.queue"></constructor-arg>
+	</bean>
+	<!-- 主题 发布-订阅模式 -->
+	<bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg index="0" value="rantz.marketing.topic"></constructor-arg>
+	</bean>
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="receiveTimeout" value="60000"></property><!-- 超时时间1分钟 -->
+		<!-- 配置默认目标 send可去掉destination参数 -->
+<!--		<property name="defaultDestination" ref="activeMQQueue"></property>-->
+	</bean>
+	<bean id="springMQSend" class="com.framework.base.util.mq.SpringMQSend">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+		<property name="destination" ref="activeMQQueue"></property>
+	</bean>
+	<bean id="springMQReceiv" class="com.framework.base.util.mq.SpringMQReceiv">
+		<property name="jmsTemplate" ref="jmsTemplate"></property>
+		<property name="destination" ref="activeMQQueue"></property>
+	</bean>
+	<bean id="messageListener" class="com.framework.base.util.mq.MyMQMessageListener"></bean>
+	<bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+		<property name="delegate" ref="messageListener"></property>
+		<property name="defaultListenerMethod" value="listenerMethod"></property>
+	</bean>
+	<!-- spring基础的消息监听容器 -->
+	<!-- DefaultMessageListenerContainer ,SimpleMessageListenerContainer-->
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+<!--		<property name="concurrentConsumers" value="10" />-->
+		<property name="concurrency" value="4-8"/><!-- 最少4个，最多8个 -->
+		<property name="connectionFactory" ref="connectionFactory"></property>
+		<property name="destination" ref="activeMQQueue"></property>
+		<property name="messageListener" ref="messageListenerAdapter"></property>
+	</bean>
+	<!-- spring支持事务的消息监听容器，可配置jta事务 -->
+<!--	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">-->
+<!--		<property name="connectionFactory" ref="connectionFactory"></property>-->
+<!--		<property name="destination" ref="activeMQQueue"></property>-->
+<!--		<property name="messageListener" ref="messageListenerAdapter"></property>-->
+		<!--配置事务管理器，如不配 则跟 基础的消息监听容器 功能一样 -->
+<!--		<property name="transactionManager" ref=""></property>-->
+<!--	</bean>-->
+<!-- Dubbo -->
+	<!--<dubbo:application name="hello-world-app" />   -->
+   <!-- <dubbo:registry  protocol="zookeeper" address="127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183" />  -->
+    <!-- 不用zookeeper则可用<dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+	<!-- <dubbo:protocol name="dubbo" port="20880" />       -->
+	<!--  <dubbo:service interface="com.framework.base.service.DubboService"  -->
+	<!--   ref="dubboService" /> -->      <!-- 和本地bean一样实现服务 -->
+	<!--<bean id="dubboService" class="com.framework.base.service.impl.DubboServiceImpl" />-->
+</beans>
